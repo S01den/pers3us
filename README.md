@@ -2,7 +2,7 @@
 
 A simple shellcode injector for ELF and PE binaries (with no-pie)
 
-### Use:
+### How to use:
 
 ./pers3us.py -f file_to_infect -s shellcode_file
 
